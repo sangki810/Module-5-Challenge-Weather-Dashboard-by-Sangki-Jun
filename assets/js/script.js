@@ -1,9 +1,10 @@
 // Global variables
-var myAPIKey = "79ccccbf056ad9d002777e1e5b09a098";
 // search history as an empty array
 var searchHistory = [];
 // weather api root url
+var queryURL = "http://api.openweathermap.org/data/2.5/weather?q=" + cityInput + "&appid=" + myAPIKey;
 // api key
+var myAPIKey = "79ccccbf056ad9d002777e1e5b09a098";
 
 // DOM element references
 var searchHistoryEL = document.getElementById("search-history")
@@ -21,7 +22,7 @@ function renderSearchHistory() {
     // loop through the history array creating a button for each item
     for (var i = 0; i <searchHistory.length; i++) {
         var newBtn = document.createElement("button");
-        newBtn.textContent = searchHistory[i]
+        newBtn.textContent = searchHistoryEL[i]
         // append to the search history container
         searchHistoryEL.append(newBtn)
     }
@@ -30,16 +31,18 @@ function renderSearchHistory() {
   // Function to update history in local storage then updates displayed history.
   function appendToHistory(search) {
     // push search term into search history array
-    
+    searchHistory.push(searchHistoryEL.value)
     // set search history array to local storage
+    localStorage.setItem('history', JSON.stringify(searchHistoryEL));
     renderSearchHistory();
   }
   
   // Function to get search history from local storage
   function initSearchHistory() {
      // get search history item from local storage
-  
+    localStorage.getItem('searchHistory')
     // set search history array equal to what you got from local storage
+    searchHistory = localStorage.getItem('searchHistory')
     renderSearchHistory();
   }
   
