@@ -1,9 +1,12 @@
 // Global variables
+var myAPIKey = "79ccccbf056ad9d002777e1e5b09a098";
 // search history as an empty array
+var searchHistory = [];
 // weather api root url
 // api key
 
 // DOM element references
+var searchHistoryEL = document.getElementById("search-history")
 // search form
 // search input
 // container/section for today's weather
@@ -14,16 +17,20 @@
 // Function to display the search history list.
 function renderSearchHistory() {
     // empty the search history container
-  
+    searchHistoryEL.innerHTML = " ";
     // loop through the history array creating a button for each item
-  
-      // append to the search history container
+    for (var i = 0; i <searchHistory.length; i++) {
+        var newBtn = document.createElement("button");
+        newBtn.textContent = searchHistory[i]
+        // append to the search history container
+        searchHistoryEL.append(newBtn)
+    }
   }
   
   // Function to update history in local storage then updates displayed history.
   function appendToHistory(search) {
     // push search term into search history array
-  
+    
     // set search history array to local storage
     renderSearchHistory();
   }
