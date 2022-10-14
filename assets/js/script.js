@@ -1,63 +1,84 @@
 // Global variables
+var city;
 // search history as an empty array
-var searchHistory = [];
+var searchHistoryArr = [];
 // weather api root url
-var queryURL = "http://api.openweathermap.org/data/2.5/weather?q=" + cityInput + "&appid=" + myAPIKey;
+var queryURL = "http://api.openweathermap.org/data/2.5/weather?q=" + city + "&appid=" + myAPIKey;
 // api key
 var myAPIKey = "79ccccbf056ad9d002777e1e5b09a098";
+var currentDay = moment().format("M/DD/YYY");
 
 // DOM element references
-var searchHistoryEL = document.getElementById("search-history")
 // search form
 // search input
+var cityInputEl = document.getElementById("city-input");
 // container/section for today's weather
+var todaysWeatherEl = document.getElementById("todays-weather");
 // container/section for the forecast 
+var forecastEl = document.getElementById('weekly-forecast');
 // search history container
-
+var searchHistoryEl = document.getElementById("search-history");
+var todaysWeatherEl = document.getElementById('todays-weather');
+var cityDateEl = document.getElementById("city-name");
+var tempEl =  document.getElementById('temperature');
+var windEl = document.getElementById('wind');
+var humidityEl = document.getElementById('humidity');
+var cloudEl = document.getElementById('weather-icon');
 
 // Function to display the search history list.
 function renderSearchHistory() {
     // empty the search history container
-    searchHistoryEL.innerHTML = " ";
+    searchHistoryEl.innerHTML = " ";
     // loop through the history array creating a button for each item
-    for (var i = 0; i <searchHistory.length; i++) {
+    for (var i = 0; i < searchHistoryArr.length; i++) {
         var newBtn = document.createElement("button");
-        newBtn.textContent = searchHistoryEL[i]
+        newBtn.textContent = searchHistoryArr[i]
         // append to the search history container
-        searchHistoryEL.append(newBtn)
+        searchHistoryEl.append(newBtn)
     }
   }
   
   // Function to update history in local storage then updates displayed history.
   function appendToHistory(search) {
     // push search term into search history array
-    searchHistory.push(searchHistoryEL.value)
+    searchHistoryArr.push(search)
     // set search history array to local storage
-    localStorage.setItem('history', JSON.stringify(searchHistoryEL));
+    localStorage.setItem("history", JSON.stringify(searchHistoryEl));
     renderSearchHistory();
   }
   
   // Function to get search history from local storage
   function initSearchHistory() {
      // get search history item from local storage
-    localStorage.getItem('searchHistory')
-    // set search history array equal to what you got from local storage
-    searchHistory = localStorage.getItem('searchHistory')
+    if (localStorage.getItem("history") !== null) { 
+      // set search history array equal to what you got from local storage
+      searchHistoryArr = JSON.parse(localStorage.getItem("history"))
+    } else {
+      localStorage.setItem("history", JSON.stringify(searchHistoryEl))
+    }
+   
+    
     renderSearchHistory();
   }
   
   // Function to display the CURRENT weather data fetched from OpenWeather api.
   function renderCurrentWeather(city, weather) {
+    todaysWeatherEl.classList.remove('d-none')
     // Store response data from our fetch request in variables
-      // temperature, wind speed, etc.
-  
-  
+    // temperature, wind speed, etc.
+    var temp = weather.temp;
+    var wind = weather.wind_speed;
+    var humidity = weather.humidity;
+    var clouds = weather.clouds;
     // document.create the elements you'll want to put this information in  
-  
+    
     // append those elements somewhere
-  
+    
     // give them their appropriate content
-  
+    cityDateEl.textContent = [city + " " + currentDay]
+    tempEl.textContent = ["Temp: " + temp + "°F"]
+    windEl.textContent = ["Wind: " + wind + "mph"]
+    humidityEl.textContent = ["Humidity: " + humidity + "%"]
   }
   
   // Function to display a FORECAST card given an object (from our renderForecast function) from open weather api
