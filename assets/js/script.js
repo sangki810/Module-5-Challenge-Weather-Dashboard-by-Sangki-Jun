@@ -71,7 +71,15 @@ function renderSearchHistory() {
     var humidity = weather.humidity;
     var clouds = weather.clouds;
     // document.create the elements you'll want to put this information in  
-    
+    if (clouds > 50) {
+      clouds = "☁️";
+    } else if (clouds>30) {
+      clouds = "⛅";
+    } else if (clouds > 10) {
+      clouds = "🌤️";
+    } else {
+      clouds = "☀️";
+    }
     // append those elements somewhere
     
     // give them their appropriate content
@@ -79,6 +87,7 @@ function renderSearchHistory() {
     tempEl.textContent = ["Temp: " + temp + "°F"]
     windEl.textContent = ["Wind: " + wind + "mph"]
     humidityEl.textContent = ["Humidity: " + humidity + "%"]
+    cloudEl.textContent = clouds
   }
   
   // Function to display a FORECAST card given an object (from our renderForecast function) from open weather api
@@ -104,7 +113,7 @@ function renderSearchHistory() {
   
   // loop over dailyForecast
   
-    for (var i = 0; i < dailyForecast.length; i++) {
+    for (var i = 0; i < 6; i++) {
   
       // send the data to our renderForecast function as an argument
           renderForecastCard(dailyForecast[i]);
