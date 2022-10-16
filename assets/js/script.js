@@ -3,7 +3,7 @@ var myAPIKey = '79ccccbf056ad9d002777e1e5b09a098';
 var city;
 var searchHistoryArr = "";
 var queryURL = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&units=metric&appid=${myAPIKey}`;
-var date = dayjs().format(MM/DD/YYY);
+var date = dayjs().format(asdf);
 // DOM element references
 var cityInputEl = document.getElementById('city-input');
 var todaysWeatherEl = document.getElementById('todays-weather');
