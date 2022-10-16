@@ -1,12 +1,13 @@
 // Global variables
 var myAPIKey = '79ccccbf056ad9d002777e1e5b09a098';
-var city;
-var searchHistoryArr = "";
+var city = "";
+const searchHistoryArr = [];
 var queryURL = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&units=metric&appid=${myAPIKey}`;
 var date = dayjs().format('MM/DD/YYYY');
 // DOM element references
 var cityInputEl = document.getElementById('city-input');
 var todaysWeatherEl = document.getElementById('todays-weather');
+var weeklyHeaderEl = document.getElementById('weekly-header');
 var forecastEl = document.getElementById('weekly-forecast');
 var searchHistoryEl = document.getElementById('search-history');
 var searchBtnEl = document.getElementById('search-btn')
@@ -23,19 +24,19 @@ function renderSearchHistory() {
   // loop through the history array creating a button for each item
   for (var i = 0; i < localStorage.length; i++) {
     var cityBtn = document.createElement("button");
-    cityBtn.textContent = city
+    cityBtn.textContent = localStorage.getItem(localStorage.key(i));
     // append to the search history container
-    cityBtn.setAttribute("class", "form-control mt-3")
-    searchHistoryEl.append(cityBtn)
+    cityBtn.setAttribute("class", "form-control mt-3");
+    searchHistoryEl.append(cityBtn);
   }
 }
   
 // Function to update history in local storage then updates displayed history.
 function appendToHistory(search) {
   // push search term into search history array
-  //searchHistoryArr.push(searchHistoryEl.value)
+  searchHistoryArr.push(search);
   // set search history array to local storage
-  localStorage.setItem("history", JSON.stringify(searchHistoryArr));
+  localStorage.setItem("history", searchHistoryArr);
   renderSearchHistory();
 }
 
@@ -44,7 +45,7 @@ function initSearchHistory() {
   // get search history item from local storage
   localStorage.getItem("history") 
   // set search history array equal to what you got from local storage
-  searchHistoryArr = (localStorage.getItem("history"))
+  //searchHistoryArr = localStorage.getItem("history");
   renderSearchHistory();
 }
   
@@ -74,7 +75,7 @@ function renderCurrentWeather(city, weather) {
 // daily forecast.
 function renderForecastCard(forecast) {
   //forecastEl.innerHTML = "";
-  forecastEl.classList.remove('d-none')
+  weeklyHeaderEl.classList.remove('d-none')
   // variables for data from api
     // temp, windspeed, etc.
   
