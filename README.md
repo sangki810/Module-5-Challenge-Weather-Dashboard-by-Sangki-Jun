@@ -10,4 +10,5 @@ This functions as a weather dashboard for any city that is looked up within the 
 ## License
 N/A
 ## Links and Screenshot
-https://sangki810.github.io/Module-6-Challenge-Weather-Dashboard-by-Sangki-Jun/
+https://sangki810.github.io/Module-6-Challenge-Weather-Dashboard-by-Sangki-Jun/<br />
+![](./assets/images/weather-dashboard.jpg)

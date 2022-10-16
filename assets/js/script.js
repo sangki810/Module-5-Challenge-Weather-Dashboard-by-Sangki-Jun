@@ -3,7 +3,7 @@ var myAPIKey = '79ccccbf056ad9d002777e1e5b09a098';
 var city;
 var searchHistoryArr = "";
 var queryURL = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&units=metric&appid=${myAPIKey}`;
-var date = dayjs().format(asdf);
+var date = dayjs().format('MM/DD/YYYY');
 // DOM element references
 var cityInputEl = document.getElementById('city-input');
 var todaysWeatherEl = document.getElementById('todays-weather');
@@ -73,7 +73,7 @@ function renderCurrentWeather(city, weather) {
 // Function to display a FORECAST card given an object (from our renderForecast function) from open weather api
 // daily forecast.
 function renderForecastCard(forecast) {
-  forecastEl.innerHTML = "";
+  //forecastEl.innerHTML = "";
   forecastEl.classList.remove('d-none')
   // variables for data from api
     // temp, windspeed, etc.
