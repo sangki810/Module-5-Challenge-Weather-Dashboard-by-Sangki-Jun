@@ -51,7 +51,7 @@ function initSearchHistory() {
   
 // Function to display the CURRENT weather data fetched from OpenWeather api.
 function renderCurrentWeather(city, weather) {
-  todaysWeatherEl.innerHTML = "";
+  //todaysWeatherEl.innerHTML = "";
   todaysWeatherEl.classList.remove('d-none')
   // Store response data from our fetch request in variables
   // temperature, wind speed, etc.
