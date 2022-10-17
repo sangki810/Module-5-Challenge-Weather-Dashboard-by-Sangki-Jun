@@ -36,10 +36,10 @@ function renderSearchHistory() {
 function appendToHistory(search) {
   // sets searched city to searched city in local storage
   localStorage.setItem(search, search);
+
+  // calls renderSearchHistory function
   renderSearchHistory();
 }
-
-appendToHistory();
 
 // Function to display the CURRENT weather data fetched from OpenWeather api.
 function renderCurrentWeather(city, weather) {
@@ -129,7 +129,6 @@ function fetchWeather(city) {
   .then(response => response.json())
   .then(data => {
     renderCurrentWeather(city, data);
-    appendToHistory(city);
   });
 
   // fetch, using the api url, .then that returns the response as json, .then that calls renderForecast
@@ -137,8 +136,11 @@ function fetchWeather(city) {
   .then(response => response.json())
   .then(data => {
     renderForecast(data.list);
-    appendToHistory(city);
+    
   });
+
+  // calls appendToHistory function
+  appendToHistory(city);
 }
   
 function handleSearchFormSubmit(e) {
