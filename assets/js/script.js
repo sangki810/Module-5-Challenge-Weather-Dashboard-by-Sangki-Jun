@@ -15,7 +15,7 @@ var cityNameDateEl = document.getElementById('city-name-date')
 var tempEl =  document.getElementById('temperature');
 var windEl = document.getElementById('wind');
 var humidityEl = document.getElementById('humidity');
-var cloudEl = document.getElementById('weather-icon');
+var iconEl = document.getElementById('weather-icon');
 
 // Function to display the search history list.
 function renderSearchHistory() {
@@ -51,56 +51,58 @@ function initSearchHistory() {
   
 // Function to display the CURRENT weather data fetched from OpenWeather api.
 function renderCurrentWeather(city, weather) {
-  //todaysWeatherEl.innerHTML = "";
   todaysWeatherEl.classList.remove('d-none')
   // Store response data from our fetch request in variables
   // temperature, wind speed, etc.
   var temp = weather.main.temp;
-  console.log(temp)
   var wind = weather.wind.speed;
   var humidity = weather.main.humidity;
-  var clouds = weather.weather[0].main;
+  var icon = weather.weather[0].main;
   // document.create the elements you'll want to put this information in  
   
   // append those elements somewhere
     
   // give them their appropriate content
   cityNameDateEl.textContent = city + " " + date;
+  iconEl.textContent = icon;
   tempEl.textContent = "Temp: " + temp + "°C";
   windEl.textContent = "Wind: " + wind + "kph";
   humidityEl.textContent = "Humidity: " + humidity + "%";
-  cloudEl.textContent = clouds;
-}
-  
-// Function to display a FORECAST card given an object (from our renderForecast function) from open weather api
-// daily forecast.
-function renderForecastCard(forecast) {
-  //forecastEl.innerHTML = "";
-  weeklyHeaderEl.classList.remove('d-none')
-  // variables for data from api
-    // temp, windspeed, etc.
-  
-  // Create elements for a card
-  
-  // append
-  
-  // Add content to elements
-  
-  // append to forecast section
 }
   
 // Function to display 5 day forecast.
 function renderForecast(dailyForecast) {
-// set up elements for this section
-    
-// append
+  weeklyHeaderEl.classList.remove('d-none')
+  // set up elements for this section
   
-// loop over dailyForecast
+  // append
   
-  for (var i = 0; i < 6; i++) {
+  // loop over dailyForecast
   
-    // send the data to our renderForecast function as an argument
-      renderForecastCard(dailyForecast[i]);
+  for (var i = 0; i < 6; i++) { 
+    var temp = dailyForecast[i].main.temp;
+    var wind = dailyForecast[i].wind.speed;
+    var humidity = dailyForecast[i].main.humidity;
+    var icon = dailyForecast[i].weather[0].main; 
+
+    var forecastCardEl = document.createElement('div');
+    var dateCardEl = document.createElement('h5');
+    var iconCardEl = document.createElement('p');
+    var tempCardEl = document.createElement('p');
+    var speedCardEl = document.createElement('p');
+    var humidityCardEl = document.createElement('p');
+
+    forecastEl.append(forecastCardEl);
+    forecastCardEl.append(dateCardEl);
+    forecastCardEl.append(iconCardEl);
+    forecastCardEl.append(tempCardEl);
+    forecastCardEl.append(speedCardEl);
+    forecastCardEl.append(humidityCardEl);
+
+    iconEl.textContent = icon;
+    tempEl.textContent = "Temp: " + temp + "°C";
+    windEl.textContent = "Wind: " + wind + "kph";
+    humidityEl.textContent = "Humidity: " + humidity + "%";
   }
 }
   
@@ -116,8 +118,7 @@ function fetchWeather(lat, lon, city) {
   var cityLat = lat;
   var cityLon = lon;
   // api url
-  var weatherUrl = `https://api.openweathermap.org/data/2.5/forecast?lat=${cityLat}&lon=${cityLon}&units=metric&appid=${myAPIKey}`
-  console.log(weatherUrl)
+  var weatherUrl = `https://api.openweathermap.org/data/2.5/forecast?lat=${cityLat}&lon=${cityLon}&units=metric&appid=${myAPIKey}`;
   // fetch, using the api url, .then that returns the response as json, .then that calls renderItems(city, data)
   fetch(weatherUrl)
   .then(function (response) {
@@ -167,7 +168,7 @@ function handleSearchFormSubmit(e) {
 }
   
 function handleSearchHistoryClick(e) {
-  // grab whatever city is is they clicked
+  // grab whatever city it is they clicked
   search = e.target.textcontent;
   fetchCoords(search);
 }
