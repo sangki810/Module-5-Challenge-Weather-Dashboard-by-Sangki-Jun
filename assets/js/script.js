@@ -79,19 +79,21 @@ function renderForecast(dailyForecast) {
   
   // loop over dailyForecast
   
-  for (var i = 0; i < 6; i++) { 
+  for (var i = 0; i < 5; i++) { 
     var temp = dailyForecast[i].main.temp;
     var wind = dailyForecast[i].wind.speed;
     var humidity = dailyForecast[i].main.humidity;
     var icon = dailyForecast[i].weather[0].main; 
-
+    console.log(temp)
     var forecastCardEl = document.createElement('div');
+    forecastCardEl.setAttribute("class", "col-md-2 card");
     var dateCardEl = document.createElement('h5');
     var iconCardEl = document.createElement('p');
     var tempCardEl = document.createElement('p');
     var speedCardEl = document.createElement('p');
     var humidityCardEl = document.createElement('p');
 
+    
     forecastEl.append(forecastCardEl);
     forecastCardEl.append(dateCardEl);
     forecastCardEl.append(iconCardEl);
@@ -99,10 +101,10 @@ function renderForecast(dailyForecast) {
     forecastCardEl.append(speedCardEl);
     forecastCardEl.append(humidityCardEl);
 
-    iconEl.textContent = icon;
-    tempEl.textContent = "Temp: " + temp + "°C";
-    windEl.textContent = "Wind: " + wind + "kph";
-    humidityEl.textContent = "Humidity: " + humidity + "%";
+    iconCardEl.textContent = icon;
+    tempCardEl.textContent = "Temp: " + temp + "°C";
+    speedCardEl.textContent = "Wind: " + wind + "kph";
+    humidityCardEl.textContent = "Humidity: " + humidity + "%";
   }
 }
   
