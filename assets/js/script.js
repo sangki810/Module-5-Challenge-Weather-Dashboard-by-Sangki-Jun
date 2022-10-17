@@ -72,6 +72,7 @@ function renderCurrentWeather(city, weather) {
   
 // Function to display 5 day forecast.
 function renderForecast(dailyForecast) {
+  forecastEl.innerHTML = "";
   weeklyHeaderEl.classList.remove('d-none')
   // set up elements for this section
   
@@ -101,6 +102,7 @@ function renderForecast(dailyForecast) {
     forecastCardEl.append(speedCardEl);
     forecastCardEl.append(humidityCardEl);
 
+    dateCardEl.textContent = dayjs().add(i+1, "day").format("MM/DD/YYYY");
     iconCardEl.textContent = icon;
     tempCardEl.textContent = "Temp: " + temp + "°C";
     speedCardEl.textContent = "Wind: " + wind + "kph";
