@@ -58,13 +58,22 @@ function renderCurrentWeather(city, weather) {
   var wind = weather.wind.speed;
   var humidity = weather.main.humidity;
   var icon = weather.weather[0].main;
+  if (icon == "Clear") {
+    icon = '<i class="fa-solid fa-sun"></i>';
+  } else if (icon == "Clouds") {
+    icon == '<i class="fa-solid fa-cloud"></i>';
+  } else if (icon == "Rain") {
+    icon = '<i class="fa-solid fa-cloud-rain"></i>';
+  } else {
+    return;
+  }
   // document.create the elements you'll want to put this information in  
   
   // append those elements somewhere
     
   // give them their appropriate content
   cityNameDateEl.textContent = city + " " + date;
-  iconEl.textContent = icon;
+  iconEl.innerHTML = icon;
   tempEl.textContent = "Temp: " + temp + "°C";
   windEl.textContent = "Wind: " + wind + "kph";
   humidityEl.textContent = "Humidity: " + humidity + "%";
@@ -85,9 +94,18 @@ function renderForecast(dailyForecast) {
     var wind = dailyForecast[i].wind.speed;
     var humidity = dailyForecast[i].main.humidity;
     var icon = dailyForecast[i].weather[0].main; 
-    
+    if (icon == "Clear") {
+      icon = '<i class="fa-solid fa-sun"></i>';
+    } else if (icon == "Clouds") {
+      icon = '<i class="fa-solid fa-cloud"></i>';
+    } else if (icon == "Rain") {
+      icon = '<i class="fa-solid fa-cloud-rain"></i>';
+    } else {
+      return;
+    }
+
     var forecastCardEl = document.createElement('div');
-    forecastCardEl.setAttribute("class", "col-md-2 card");
+    forecastCardEl.setAttribute("class", "col-md-2 card m-3");
     var dateCardEl = document.createElement('h5');
     var iconCardEl = document.createElement('p');
     var tempCardEl = document.createElement('p');
@@ -103,7 +121,7 @@ function renderForecast(dailyForecast) {
     forecastCardEl.append(humidityCardEl);
 
     dateCardEl.textContent = dayjs().add(i+1, "day").format("MM/DD/YYYY");
-    iconCardEl.textContent = icon;
+    iconCardEl.innerHTML = icon;
     tempCardEl.textContent = "Temp: " + temp + "°C";
     speedCardEl.textContent = "Wind: " + wind + "kph";
     humidityCardEl.textContent = "Humidity: " + humidity + "%";
