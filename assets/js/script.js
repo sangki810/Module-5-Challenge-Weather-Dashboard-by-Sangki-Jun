@@ -39,6 +39,8 @@ function appendToHistory(search) {
   renderSearchHistory();
 }
 
+appendToHistory();
+
 // Function to display the CURRENT weather data fetched from OpenWeather api.
 function renderCurrentWeather(city, weather) {
   todaysWeatherEl.classList.remove('d-none')
@@ -117,6 +119,7 @@ function renderForecast(hourlyForecast) {
   
 // fetches weather data from api
 function fetchWeather(city) {
+  
   // api url
   var weatherUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${myAPIKey}`
   var forecastUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&units=metric&appid=${myAPIKey}`;
@@ -125,7 +128,8 @@ function fetchWeather(city) {
   fetch(weatherUrl)
   .then(response => response.json())
   .then(data => {
-    renderCurrentWeather(city, data)
+    renderCurrentWeather(city, data);
+    appendToHistory(city);
   });
 
   // fetch, using the api url, .then that returns the response as json, .then that calls renderForecast
@@ -133,6 +137,7 @@ function fetchWeather(city) {
   .then(response => response.json())
   .then(data => {
     renderForecast(data.list);
+    appendToHistory(city);
   });
 }
   
