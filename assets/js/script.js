@@ -85,7 +85,7 @@ function renderForecast(dailyForecast) {
     var wind = dailyForecast[i].wind.speed;
     var humidity = dailyForecast[i].main.humidity;
     var icon = dailyForecast[i].weather[0].main; 
-    console.log(temp)
+    
     var forecastCardEl = document.createElement('div');
     forecastCardEl.setAttribute("class", "col-md-2 card");
     var dateCardEl = document.createElement('h5');

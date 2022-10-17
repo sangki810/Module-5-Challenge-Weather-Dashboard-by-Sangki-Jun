@@ -6,7 +6,7 @@ N/A
 ## Usage
 This functions as a weather dashboard for any city that is looked up within the search bar. The site displays the current day's weather for the city as well as a 5-day forecast for the future. The data displayed for the weather is temperature, wind speed, humidity level, and clouds conditions.
 ## Credits
-
+A huge shoutout to Youssef Ojeil, Mateo Wallace, and Tristan Ballin for posting their repositories! It helped me understand how to figure out my own site.
 ## License
 N/A
 ## Links and Screenshot
